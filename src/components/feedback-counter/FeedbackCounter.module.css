@@ -1,0 +1,7 @@
+
+.containerWrap {
+  outline: 2px solid red;
+  outline-offset: -2px;
+
+  padding: 10px;
+}
