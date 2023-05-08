@@ -15,26 +15,50 @@ class FeedbackCounter extends React.Component {
     bad: 0
   };
 
+  // handleGood = () => {
+  //   this.setState((prevState) => {
+  //     return {
+  //       good: prevState.good + 1,
+  //     };
+  //   });
+  // };
   handleGood = () => {
-    this.setState((prevState) => {
-      return {
-        good: prevState.good + 1,
-      };
-    });
+  this.setState(prevState => ({
+    ...prevState,
+    good: prevState.good + 1,
+  }));
   };
+
+  // handleNeutral = () => {
+  //   this.setState((prevState) => {
+  //     return {
+  //       neutral: prevState.neutral + 1,
+  //     };
+  //   });
+  // };
   handleNeutral = () => {
-    this.setState((prevState) => {
-      return {
-        neutral: prevState.neutral + 1,
-      };
-    });
+  this.setState(prevState => ({
+    ...prevState,
+    neutral: prevState.neutral + 1,
+  }));
   };
+
+  // handleBad = () => {
+  //   this.setState((prevState) => {
+  //     return {
+  //       bad: prevState.bad + 1,
+  //     };
+  //   });
+  // };
   handleBad = () => {
-    this.setState((prevState) => {
-      return {
-        bad: prevState.bad + 1,
-      };
-    });
+  this.setState(prevState => ({
+    ...prevState,
+    bad: prevState.bad + 1,
+  }));
+};
+
+  handleLeaveFeedback = (option) => {
+    this.setState((prevState) => ({ [option]: prevState[option] + 1 }));
   };
 
   countTotalFeedback = () => {
@@ -42,7 +66,7 @@ class FeedbackCounter extends React.Component {
     return good + neutral + bad;
   };
 
-  countPositiveFeedbackPercentage() {
+  countPositiveFeedbackPercentage = () => {
     const { good } = this.state;
     const total = this.countTotalFeedback();
     if (total === 0) {
@@ -52,6 +76,7 @@ class FeedbackCounter extends React.Component {
   }
 
   render() {
+    const { good, neutral, bad } = this.state;
     const totalFeedback = this.countTotalFeedback();
     const positiveFeedbackPercentage = this.countPositiveFeedbackPercentage();
     
@@ -60,17 +85,20 @@ class FeedbackCounter extends React.Component {
         <h1>Pleas leave feedback</h1>
                     
         <FeedbackOptions
-          onGood={this.handleGood}
-          onNeutral={this.handleNeutral}
-          onBad={this.handleBad}
+          // onGood={this.handleGood}
+          // onNeutral={this.handleNeutral}
+          // onBad={this.handleBad}
+          options={["good", "neutral", "bad"]}
+          onLeaveFeedback={this.handleLeaveFeedback}
         />
 
         <h2>Statistics</h2>
 
         <Statistics
-          good={this.state.good}
-          neutral={this.state.neutral}
-          bad={this.state.bad}
+          // good={this.state.good}
+          // neutral={this.state.neutral}
+          // bad={this.state.bad}
+          {...this.state}
           total={totalFeedback}
           positivePercentage={positiveFeedbackPercentage}
         />
