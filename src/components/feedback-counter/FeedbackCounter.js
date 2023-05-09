@@ -22,12 +22,12 @@ class FeedbackCounter extends React.Component {
   //     };
   //   });
   // };
-  handleGood = () => {
-  this.setState(prevState => ({
-    ...prevState,
-    good: prevState.good + 1,
-  }));
-  };
+  // handleGood = () => {
+  // this.setState(prevState => ({
+  //   ...prevState,
+  //   good: prevState.good + 1,
+  // }));
+  // };
 
   // handleNeutral = () => {
   //   this.setState((prevState) => {
@@ -36,12 +36,12 @@ class FeedbackCounter extends React.Component {
   //     };
   //   });
   // };
-  handleNeutral = () => {
-  this.setState(prevState => ({
-    ...prevState,
-    neutral: prevState.neutral + 1,
-  }));
-  };
+  // handleNeutral = () => {
+  // this.setState(prevState => ({
+  //   ...prevState,
+  //   neutral: prevState.neutral + 1,
+  // }));
+  // };
 
   // handleBad = () => {
   //   this.setState((prevState) => {
@@ -50,35 +50,38 @@ class FeedbackCounter extends React.Component {
   //     };
   //   });
   // };
-  handleBad = () => {
-  this.setState(prevState => ({
-    ...prevState,
-    bad: prevState.bad + 1,
-  }));
-};
+//   handleBad = () => {
+//   this.setState(prevState => ({
+//     ...prevState,
+//     bad: prevState.bad + 1,
+//   }));
+//  };
 
   handleLeaveFeedback = (option) => {
     this.setState((prevState) => ({ [option]: prevState[option] + 1 }));
   };
 
-  countTotalFeedback = () => {
-    const { good, neutral, bad } = this.state;
-    return good + neutral + bad;
-  };
+  // countTotalFeedback = () => {
+  //   const { good, neutral, bad } = this.state;
+  //   return good + neutral + bad;
+  // };
 
-  countPositiveFeedbackPercentage = () => {
-    const { good } = this.state;
-    const total = this.countTotalFeedback();
-    if (total === 0) {
-      return 0;
-    }
-    return Math.round((good / total) * 100);
-  }
+  // countPositiveFeedbackPercentage = () => {
+  //   const { good } = this.state;
+  //   const total = this.countTotalFeedback();
+  //   if (total === 0) {
+  //     return 0;
+  //   }
+  //   return Math.round((good / total) * 100);
+  // }
 
   render() {
     const { good, neutral, bad } = this.state;
-    const totalFeedback = this.countTotalFeedback();
-    const positiveFeedbackPercentage = this.countPositiveFeedbackPercentage();
+    // const totalFeedback = this.countTotalFeedback();
+    // const positiveFeedbackPercentage = this.countPositiveFeedbackPercentage();
+    const countTotalFeedback = good + neutral + bad;
+    const positiveFeedbackPercentage = ((good / countTotalFeedback) * 100).toFixed([0]);
+
     
     return (
       <div className={css.containerWrap}>
@@ -99,7 +102,7 @@ class FeedbackCounter extends React.Component {
           // neutral={this.state.neutral}
           // bad={this.state.bad}
           {...this.state}
-          total={totalFeedback}
+          total={countTotalFeedback}
           positivePercentage={positiveFeedbackPercentage}
         />
      </div>
